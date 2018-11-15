@@ -1,0 +1,19 @@
+{
+  "name": "super_journal",
+  "version": "1.0.0",
+  "description": "A plain text journal for the command line",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "journal"
+  ],
+  "author": "Leonardo Bighi",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "commander": "^2.19.0",
+    "configstore": "^4.0.0"
+  }
+}
