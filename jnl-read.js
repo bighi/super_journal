@@ -19,5 +19,5 @@ const entriesByTag = entry.filterTags(entriesByDate, program.tag)
 const entriesByCount = entry.filterNumber(entriesByTag, program.number)
 
 entriesByCount.forEach((entry) => {
-  console.log(entry.when, entry.tags.join())
+  console.log(entry.date, entry.tags.join())
 })

@@ -8,11 +8,25 @@ function readJournal (journalName) {
     journalName = conf.get('journals')[0]
   }
 
-  const path = journalPath(journalName)
+  const path = _journalPath(journalName)
   return fs.readFileSync(path, 'utf8')
 }
 
-function journalPath (journalName) {
+function numericalizeDateString (dateString) {
+  if (dateString === undefined || dateString === null) { return false }
+
+  return dateString.split('.')[0]
+    .replace(/-/g, '')
+    .replace(/:/g, '')
+    .replace(/\s/g, '')
+    .replace(/T/g, '')
+}
+
+function dateToString (date) {
+
+}
+
+function _journalPath (journalName) {
   let dir = conf.get('directory')
   const ext = conf.get('extension')
 
@@ -24,5 +38,7 @@ function journalPath (journalName) {
 }
 
 module.exports = {
-  readJournal
+  readJournal,
+  numericalizeDateString,
+  dateToString
 }
