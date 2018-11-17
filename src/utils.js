@@ -10,7 +10,7 @@ function readJournal (journalName) {
     journalName = conf.get('journals')[0]
   }
 
-  const path = _journalPath(journalName)
+  const path = journalPath(journalName)
   return fs.readFileSync(path, 'utf8')
 }
 
@@ -18,7 +18,7 @@ function convertToTimestamp (dateString) {
   return moment(dateString).format('X')
 }
 
-function _journalPath (journalName) {
+function journalPath (journalName) {
   let dir = conf.get('directory')
   const ext = conf.get('extension')
 
@@ -85,5 +85,6 @@ module.exports = {
   sortEntries,
   filterNumber,
   filterDate,
-  filterTags
+  filterTags,
+  journalPath
 }
