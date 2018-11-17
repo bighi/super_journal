@@ -6,10 +6,6 @@ const moment = require('moment')
 const entry = require('./entry')
 
 function readJournal (journalName) {
-  if (journalName === undefined || journalName === '') {
-    journalName = conf.get('journals')[0]
-  }
-
   const path = journalPath(journalName)
   return fs.readFileSync(path, 'utf8')
 }
@@ -19,6 +15,10 @@ function convertToTimestamp (dateString) {
 }
 
 function journalPath (journalName) {
+  if (journalName === undefined || journalName === '') {
+    journalName = conf.get('journals')[0]
+  }
+
   let dir = conf.get('directory')
   const ext = conf.get('extension')
 

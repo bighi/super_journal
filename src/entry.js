@@ -20,6 +20,8 @@ class Entry {
   }
 
   set content (value) {
+    if (value === undefined || value === '') { return false }
+
     this._content = value
     this.tags = this._findTags()
   }
