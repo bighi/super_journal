@@ -42,8 +42,9 @@ function insertEntry (entry) {
 
 function saveEntries (entries) {
   const contents = entries.map(entry => entry.formattedContent())
+  let journalContent = contents.join('').replace(/\n\n+$/, '\n')
 
-  fs.writeFile(utils.journalPath(), contents.join(''), (err) => {
+  fs.writeFile(utils.journalPath(), journalContent, (err) => {
     if (err) {
       return console.log(err)
     }

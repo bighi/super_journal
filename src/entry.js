@@ -22,6 +22,8 @@ class Entry {
   set content (value) {
     if (value === undefined || value === '') { return false }
 
+    value = value.replace(/\n+$/g, '')
+
     this._content = value
     this.tags = this._findTags()
   }
