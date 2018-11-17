@@ -29,8 +29,24 @@ function createEntryFromArgs (date, content) {
   return new Entry(date, content)
 }
 
-function createEntryFromEditor () {
+function createEntryFromEditor (date) {
+  editor('./temp', (code, sig) => {
+    if (code !== 0) {
+      console.log('The file was not saved')
+      return false
+    }
 
+    fs.readFile('./temp', 'utf8', (err, content) => {
+      if (err) {
+        console.log("Error: entry won't be saved")
+        return false
+      }
+
+      fs.unlink('./temp', () => {})
+      const entry = new Entry(date, content)
+      insertEntry(entry)
+    })
+  })
 }
 
 function insertEntry (entry) {
