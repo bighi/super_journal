@@ -1,17 +1,9 @@
 const moment = require('moment')
 
 class Entry {
-  constructor (rawEntry) {
-    this.parse(rawEntry)
-  }
-
-  parse (rawEntry) {
-    if (rawEntry === '') { return false }
-
-    let lines = rawEntry.split(/\n/)
-    this.date = this.findDate(lines.shift())
-    this.tags = []
-    this.content = lines.join('\n')
+  constructor (date, content) {
+    this.date = date
+    this.content = content
   }
 
   get date () {
@@ -32,11 +24,6 @@ class Entry {
     this.tags = this.findTags()
   }
 
-  findDate (line) {
-    const pattern = /\d{4}-\d{2}-\d{2} \d{2}:\d{2}:?\d{0,2}/
-    return line.match(pattern)[0]
-  }
-
   findTags () {
     const tags = this.content.match(/@\w+/g)
 
@@ -48,4 +35,24 @@ class Entry {
   }
 }
 
-module.exports = Entry
+function buildFromText (rawEntry) {
+  if (rawEntry === '') { return false }
+
+  let lines = rawEntry.split(/\n/)
+  const date = _findDate(lines.shift())
+  const content = lines.join('\n')
+  return new Entry(date, content)
+}
+
+function _findDate (line) {
+  const pattern = /\d{4}-\d{2}-\d{2} \d{2}:\d{2}:?\d{0,2}/
+  return line.match(pattern)[0]
+}
+
+module.exports = {
+  buildFromText,
+  Entry
+}
+
+// module.exports.Entry = Entry
+// module.exports.buildEntryFromText = buildEntryFromText

@@ -3,7 +3,7 @@ const path = require('path')
 const os = require('os')
 const fs = require('fs')
 const moment = require('moment')
-const Entry = require('./entry')
+const entry = require('./entry')
 
 function readJournal (journalName) {
   if (journalName === undefined || journalName === '') {
@@ -36,7 +36,7 @@ function getEntries (journalName) {
 
   let entries = []
   entries = journalContent.split(splitPattern).map((rawEntry) => {
-    return new Entry(rawEntry)
+    return entry.buildFromText(rawEntry)
   })
 
   return entries
