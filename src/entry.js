@@ -21,10 +21,14 @@ class Entry {
 
   set content (value) {
     this._content = value
-    this.tags = this.findTags()
+    this.tags = this._findTags()
   }
 
-  findTags () {
+  formattedContent () {
+    return '$ ' + this.date + '\n' + this.content + '\n\n'
+  }
+
+  _findTags () {
     const tags = this.content.match(/@\w+/g)
 
     if (tags && tags.length > 0) {
