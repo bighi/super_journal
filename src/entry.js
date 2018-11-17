@@ -1,56 +1,4 @@
-const utils = require('./utils')
-
-function getEntries (journalName) {
-  const journalContent = utils.readJournal(journalName)
-  // const splitPattern = /\n$ \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/
-  const splitPattern = /\n\n\$ /m
-
-  let entries = []
-  entries = journalContent.split(splitPattern).map((rawEntry) => {
-    return new Entry(rawEntry)
-  })
-
-  return entries
-}
-
-function sortEntries (entries) {
-  return entries.sort((a, b) => a.numericWhen - b.numericWhen)
-}
-
-function filterNumber (entries, number) {
-  console.log('filtering by number', number)
-  return entries.slice(0 - number)
-}
-
-function filterDate (entries, startDate, endDate) {
-  if (startDate === undefined && endDate === undefined) { return entries }
-  console.log('filtering by date', startDate, endDate)
-  console"entries".log('received', entries.length, 'entries')
-
-  if (startDate) {
-    startDate = utils.numericalizeDateString(new Date(startDate).toISOString())
-    entries = entries.filter((entry) => { entry.numericWhen >= startDate })
-  }
-
-  if (endDate) {
-    endDate = utils.numericalizeDateString(new Date(endDate).toISOString())
-    entries = entries.filter((entry) => { entry.numericWhen <= endDate })
-  }
-
-  console.log('returning', entries.length, 'entries')
-  return entries
-}
-
-function filterTags (entries, tagList) {
-  if (tagList === undefined) { return entries }
-  console.log('filtering by tags', tagList)
-
-  tagList.split(',').forEach((tag) => {
-    entries = entries.filter((entry) => entry.tags.includes(tag))
-  })
-
-  return entries
-}
+const moment = require('moment')
 
 class Entry {
   constructor (rawEntry) {
@@ -67,12 +15,12 @@ class Entry {
   }
 
   get date () {
-    return this._date
+    return this._date.format('YYYY-MM-DD HH:mm:ss')
   }
 
-  set date (value) {
-    this._date = value
-    this.numericDate = utils.numericalizeDateString(new Date(this._date).toISOString())
+  set date (dateString) {
+    this._date = moment(dateString)
+    this.timestamp = this._date.format('X')
   }
 
   get content () {
@@ -100,10 +48,4 @@ class Entry {
   }
 }
 
-module.exports = {
-  getEntries,
-  sortEntries,
-  filterNumber,
-  filterDate,
-  filterTags
-}
+module.exports = Entry

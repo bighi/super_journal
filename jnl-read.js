@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const program = require('commander')
-const entry = require('./src/entry')
+const utils = require('./src/utils')
 
 program
   .option('-n, --number [number]', 'The number of journal entries to read', 10)
@@ -12,11 +12,11 @@ program
 
 console.log('read')
 
-const unfilteredEntries = entry.sortEntries(entry.getEntries())
+const unfilteredEntries = utils.sortEntries(utils.getEntries())
 
-const entriesByDate = entry.filterDate(unfilteredEntries, program.from, program.until)
-const entriesByTag = entry.filterTags(entriesByDate, program.tag)
-const entriesByCount = entry.filterNumber(entriesByTag, program.number)
+const entriesByDate = utils.filterDate(unfilteredEntries, program.from, program.until)
+const entriesByTag = utils.filterTags(entriesByDate, program.tag)
+const entriesByCount = utils.filterNumber(entriesByTag, program.number)
 
 entriesByCount.forEach((entry) => {
   console.log(entry.date, entry.tags.join())
