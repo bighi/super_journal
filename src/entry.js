@@ -1,4 +1,5 @@
 const moment = require('moment')
+const monday = require('./monday')
 
 class Entry {
   constructor (date, content) {
@@ -11,7 +12,13 @@ class Entry {
   }
 
   set date (dateString) {
-    this._date = moment(dateString)
+    const match = dateString.match(/(yesterday|today|sunday|monday|tuesday|wednesday|thursday|friday|saturday)/g)
+
+    if (match && match.length > 0) {
+      this._date = this._parseSpecialDate(match[0], dateString)
+    } else {
+      this._date = moment(dateString)
+    }
     this.timestamp = this._date.format('X')
   }
 
@@ -30,6 +37,25 @@ class Entry {
 
   formattedContent () {
     return '$ ' + this.date + '\n' + this.content + '\n\n'
+  }
+
+  _parseSpecialDate (day, dateString) {
+    let date
+
+    switch (day) {
+      case 'today':
+        dateString = dateString.replace(/today/, moment().format('YYYY-MM-DD'))
+        break
+      case 'yesterday':
+        date = moment().subtract(1, 'day').format('YYYY-MM-DD')
+        dateString = dateString.replace(/yesterday/, date)
+        break
+      default:
+        date = monday.findPreviousDayOfWeek(day)
+        dateString = dateString.replace(day, moment(date).format('YYYY-MM-DD'))
+    }
+
+    return moment(dateString)
   }
 
   _findTags () {

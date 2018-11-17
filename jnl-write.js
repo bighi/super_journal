@@ -13,8 +13,6 @@ program
 
 let entry
 
-console.log('lets begin')
-
 if (program.content && program.content !== '') {
   console.log('passed contend input:', program.content)
   entry = createEntryFromArgs(program.date, program.content)
@@ -22,8 +20,6 @@ if (program.content && program.content !== '') {
 } else {
   entry = createEntryFromEditor(program.date)
 }
-
-console.log('write')
 
 function createEntryFromArgs (date, content) {
   return new Entry(date, content)
