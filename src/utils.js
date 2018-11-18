@@ -29,13 +29,21 @@ function journalPath (journalName) {
   return path.join(dir, journalName + '.' + ext)
 }
 
-function getEntries (journalName) {
-  const journalContent = readJournal(journalName)
-  // const splitPattern = /\n$ \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/
-  const splitPattern = /\n\n\$ /m
+function getEntriesFromJournals (journals) {
+  let entries = []
+  journals.forEach(journal => {
+    const journalEntries = getEntriesFromSingleJournal(journal)
+    entries = entries.concat(journalEntries)
+  })
+  return entries
+}
+
+function getEntriesFromSingleJournal (journal) {
+  let contents = readJournal(journal)
 
   let entries = []
-  entries = journalContent.split(splitPattern).map((rawEntry) => {
+  const splitPattern = /\n\n\$ /m
+  entries = contents.split(splitPattern).map((rawEntry) => {
     return entry.buildFromText(rawEntry)
   })
 
@@ -81,7 +89,8 @@ function filterTags (entries, tagList) {
 module.exports = {
   readJournal,
   convertToTimestamp,
-  getEntries,
+  getEntriesFromJournals,
+  getEntriesFromSingleJournal,
   sortEntries,
   filterNumber,
   filterDate,

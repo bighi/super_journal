@@ -4,20 +4,24 @@ const program = require('commander')
 const utils = require('./src/utils')
 
 program
-  .option('-n, --number [number]', 'The number of journal entries to read', 10)
-  .option('-t, --tag [tag]', 'Show only entries with the specified tag(s)')
-  .option('-f, --from [date]', 'Show only entries starting on the date and time')
-  .option('-u, --until [date]', 'Show only entries before that date and time')
+  .option('-n, --number <number>', 'The number of journal entries to read', 10)
+  .option('-t, --tag <tag>', 'Show only entries with the specified tag(s)')
+  .option('-f, --from <date>', 'Show only entries starting on the date and time')
+  .option('-u, --until <date>', 'Show only entries before that date and time')
+  .option('-j, --journal <journal1,journal2>', 'Selects one or more journals (comma-separated)')
   .parse(process.argv)
 
-console.log('read')
+let journals = []
+if (program.journal) {
+  journals = program.journal.split(',')
+}
 
-const unfilteredEntries = utils.sortEntries(utils.getEntries())
+let entries = utils.getEntriesFromJournals(journals)
+entries = utils.sortEntries(entries)
+entries = utils.filterDate(entries, program.from, program.until)
+entries = utils.filterTags(entries, program.tag)
+entries = utils.filterNumber(entries, program.number)
 
-const entriesByDate = utils.filterDate(unfilteredEntries, program.from, program.until)
-const entriesByTag = utils.filterTags(entriesByDate, program.tag)
-const entriesByCount = utils.filterNumber(entriesByTag, program.number)
-
-entriesByCount.forEach((entry) => {
+entries.forEach((entry) => {
   console.log(entry.date, entry.tags.join())
 })
