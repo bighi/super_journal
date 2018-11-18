@@ -2,18 +2,23 @@
 
 const program = require('commander')
 const utils = require('./src/utils')
+const conf = require('./src/config')
 
 program
   .option('-n, --number <number>', 'The number of journal entries to read', 10)
   .option('-t, --tag <tag>', 'Show only entries with the specified tag(s)')
   .option('-f, --from <date>', 'Show only entries starting on the date and time')
   .option('-u, --until <date>', 'Show only entries before that date and time')
-  .option('-j, --journal <journal1,journal2>', 'Selects one or more journals (comma-separated)')
+  .option('-j, --journal <journal1,journal2>', 'Selects one or more journals (comma-separated)', conf.get('journals')[0])
   .parse(process.argv)
 
 let journals = []
 if (program.journal) {
-  journals = program.journal.split(',')
+  if (program.journal === 'all') {
+    journals = conf.get('journals')
+  } else {
+    journals = program.journal.split(',')
+  }
 }
 
 let entries = utils.getEntriesFromJournals(journals)
