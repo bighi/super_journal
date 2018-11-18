@@ -36,7 +36,7 @@ class Entry {
   }
 
   formattedContent () {
-    return '$ ' + this.date + '\n' + this.content + '\n\n'
+    return '$ ' + this.date + '\n' + this.content + '\n'
   }
 
   _parseSpecialDate (day, dateString) {

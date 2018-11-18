@@ -23,5 +23,5 @@ entries = utils.filterTags(entries, program.tag)
 entries = utils.filterNumber(entries, program.number)
 
 entries.forEach((entry) => {
-  console.log(entry.date, entry.tags.join())
+  console.log(entry.formattedContent())
 })
