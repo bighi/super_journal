@@ -7,5 +7,5 @@ const defaults = {
   'extension': 'md'
 }
 
-const conf = new Configstore('super_journal', defaults)
+const conf = new Configstore('super_journal', defaults, { globalConfigPath: true })
 module.exports = conf
