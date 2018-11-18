@@ -16,6 +16,7 @@
     "commander": "^2.19.0",
     "configstore": "^4.0.0",
     "editor": "^1.0.0",
-    "moment": "^2.22.2"
+    "moment": "^2.22.2",
+    "next_monday": "^1.0.0"
   }
 }

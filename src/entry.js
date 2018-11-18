@@ -1,5 +1,5 @@
 const moment = require('moment')
-const monday = require('./monday')
+const nm = require('next_monday')
 
 class Entry {
   constructor (date, content) {
@@ -51,7 +51,7 @@ class Entry {
         dateString = dateString.replace(/yesterday/, date)
         break
       default:
-        date = monday.findPreviousDayOfWeek(day)
+        date = nm.findPreviousDayOfWeek(day)
         dateString = dateString.replace(day, moment(date).format('YYYY-MM-DD'))
     }
 
