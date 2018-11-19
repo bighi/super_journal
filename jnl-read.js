@@ -24,6 +24,16 @@ if (program.journal) {
   }
 }
 
+// We check if the user passed journals that are listed in his config file
+if (journals.length > 0) {
+  journals.forEach(journal => {
+    if (!utils.validateJournal(journal)) {
+      console.log('Error: one (or more) journal is not valid')
+      process.exit(1)
+    }
+  })
+}
+
 // The order of the filters is important. First I get them by date, which is
 // faster than filtering by tag. Then I filter by tag. And only them I count
 // them, because I don't want to count entries that will be removed later.

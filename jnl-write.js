@@ -12,8 +12,12 @@ program
   .option('-j, --journal <journal>', 'Set a journal to write in')
   .parse(process.argv)
 
+// We check if the user passed a journal that is listed in his config file
+if (program.journal && !utils.validateJournal(program.journal)) {
+  console.log('Error: journal name is not valid')
+  process.exit(1)
+}
 
-let entry
 if (program.content && program.content !== '') {
   console.log('passed contend input:', program.content)
   createEntryFromArgs(program.date, program.content, program.journal)

@@ -116,6 +116,10 @@ function filterTags (entries, tagList) {
   return entries
 }
 
+function validateJournal (journalName) {
+  return conf.get('journals').includes(journalName)
+}
+
 module.exports = {
   readJournal,
   convertToTimestamp,
@@ -125,5 +129,6 @@ module.exports = {
   filterNumber,
   filterDate,
   filterTags,
-  journalPath
+  journalPath,
+  validateJournal
 }
