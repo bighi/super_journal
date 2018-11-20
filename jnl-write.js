@@ -7,8 +7,8 @@ const Entry = require('./src/entry').Entry
 const fs = require('fs')
 
 program
-  .option('-d, --date [date]', 'Set the date for the entry')
-  .option('-c, --content [text]', 'The text for the entry')
+  .option('-d, --date "YYYY-MM-DD hh:mm:ss"', 'Set the date for the entry')
+  .option('-c, --content "the content for the entry"', 'The text for the entry')
   .option('-j, --journal <journal>', 'Set a journal to write in')
   .parse(process.argv)
 
