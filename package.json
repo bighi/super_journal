@@ -1,18 +1,22 @@
 {
   "name": "super_journal",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A plain text journal for the command line",
-  "main": "index.js",
+  "main": "jnl.js",
+  "bin": { "jnl": "./jnl.js" },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "journal"
+    "journal",
+    "plaintext",
+    "diary",
+    "plain text",
+    "writing"
   ],
   "author": "Leonardo Bighi",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
-    "chalk": "^2.4.1",
     "commander": "^2.19.0",
     "configstore": "^4.0.0",
     "editor": "^1.0.0",

@@ -7,8 +7,8 @@ const Entry = require('./src/entry').Entry
 const fs = require('fs')
 
 program
-  .option('-d, --date "YYYY-MM-DD hh:mm:ss"', 'Set the date for the entry')
-  .option('-c, --content "the content for the entry"', 'The text for the entry')
+  .option('-d, --date <"YYYY-MM-DD hh:mm:ss">', 'Set the date for the entry')
+  .option('-c, --content <"the content for the entry">', 'The text for the entry')
   .option('-j, --journal <journal>', 'Set a journal to write in')
   .parse(process.argv)
 
@@ -27,6 +27,7 @@ if (program.content && program.content !== '') {
 // This creates a new Entry from arguments passed through the command line.
 // This is intended as a quick way to write without opening an editor.
 function createEntryFromArgs (date, content, journal) {
+  console.log('content', content)
   const entry = new Entry(date, content)
   insertEntry(entry, journal)
 }

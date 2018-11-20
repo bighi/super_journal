@@ -7,8 +7,8 @@ const conf = require('./src/config')
 program
   .option('-n, --number <number>', 'The number of journal entries to read', 10)
   .option('-t, --tag <@tag1,@tag2>', 'Show only entries with the specified tag(s)')
-  .option('-f, --from "YYYY-MM-DD hh:mm:ss"', 'Show only entries starting on the date and time')
-  .option('-u, --until "YYYY-MM-DD hh:mm:ss"', 'Show only entries before that date and time')
+  .option('-f, --from <"YYYY-MM-DD hh:mm:ss">', 'Show only entries starting on the date and time')
+  .option('-u, --until <"YYYY-MM-DD hh:mm:ss">', 'Show only entries before that date and time')
   .option('-j, --journal <journal1,journal2>', 'Selects one or more journals (comma-separated)', conf.get('journals')[0])
   .parse(process.argv)
 
