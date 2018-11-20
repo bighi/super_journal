@@ -78,6 +78,7 @@ function insertEntry (entry, journal) {
 // file, the entire journal content might be lost.
 function saveEntries (entries, journal) {
   const contents = entries.map(entry => entry.formattedContent())
+
   // If the last entry ends with multiple endlines, I just remove the extra
   // line breaks.
   let journalContent = contents.join('\n').replace(/\n\n+$/, '\n')

@@ -11,7 +11,7 @@ const entry = require('./entry')
 // Reads the entire content of a journal and returns it in a giant string.
 function readJournal (journalName) {
   const path = journalPath(journalName)
-  return fs.readFileSync(path, 'utf8')
+  return fs.readFileSync(path, { encoding: 'utf8', flag: 'w+' })
 }
 
 // Converts a moment() date to the UNIX timestamp
@@ -58,6 +58,7 @@ function getEntriesFromJournals (journals) {
 // a line.
 function getEntriesFromSingleJournal (journal) {
   let contents = readJournal(journal)
+  if (contents === '') { return [] }
 
   let entries = []
   const splitPattern = /\n\n\$ /m
