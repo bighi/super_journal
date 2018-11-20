@@ -1,6 +1,6 @@
 {
   "name": "super_journal",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A plain text journal for the command line",
   "main": "jnl.js",
   "bin": { "jnl": "./jnl.js" },

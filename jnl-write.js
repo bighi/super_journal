@@ -27,7 +27,6 @@ if (program.content && program.content !== '') {
 // This creates a new Entry from arguments passed through the command line.
 // This is intended as a quick way to write without opening an editor.
 function createEntryFromArgs (date, content, journal) {
-  console.log('content', content)
   const entry = new Entry(date, content)
   insertEntry(entry, journal)
 }
