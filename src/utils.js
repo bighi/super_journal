@@ -78,7 +78,6 @@ function sortEntries (entries) {
 // This function returns only the most recent N entries from the array, by
 // counting from the end. That's why it uses a negative number when slicing.
 function filterNumber (entries, number) {
-  console.log('filtering by number', number)
   return entries.slice(0 - number)
 }
 
@@ -108,7 +107,6 @@ function filterDate (entries, startDate, endDate) {
 // instead of ALL of them.
 function filterTags (entries, tagList) {
   if (tagList === undefined) { return entries }
-  console.log('filtering by tags', tagList)
 
   tagList.split(',').forEach((tag) => {
     entries = entries.filter((entry) => entry.tags.includes(tag))

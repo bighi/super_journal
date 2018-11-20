@@ -19,7 +19,6 @@ if (program.journal && !utils.validateJournal(program.journal)) {
 }
 
 if (program.content && program.content !== '') {
-  console.log('passed contend input:', program.content)
   createEntryFromArgs(program.date, program.content, program.journal)
 } else {
   createEntryFromEditor(program.date, program.journal)

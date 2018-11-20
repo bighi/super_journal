@@ -20,7 +20,5 @@ if (program.editor) {
   process.env.EDITOR = program.editor
 }
 
-console.log(process.env)
-
 const path = utils.journalPath(program.journal)
 editor(path, (code, sig) => {})
