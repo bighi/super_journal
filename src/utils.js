@@ -11,7 +11,27 @@ const entry = require('./entry')
 // Reads the entire content of a journal and returns it in a giant string.
 function readJournal (journalName) {
   const path = journalPath(journalName)
-  return fs.readFileSync(path, { encoding: 'utf8', flag: 'w+' })
+  createIfNotExists(path)
+  return fs.readFileSync(path, { encoding: 'utf8' })
+}
+
+// Checks if the file exists, and if the directory of the file also exists. if
+// not, then creates the directory or file (whatever is needed).
+// This is the best way to guarantee that a journal exists.
+function createIfNotExists (filePath) {
+  const directory = require('path').dirname(filePath)
+
+  // Checks the directory first
+  if (!fs.existsSync(directory)) {
+    console.log("Directory for the journal doesn't exist. Creating it.")
+    fs.mkdirSync(directory)
+  }
+
+  // Now checks the file
+  if (!fs.existsSync(filePath)) {
+    console.log("Text file for the journal doesn't exist. Creating it.")
+    fs.closeSync(fs.openSync(filePath, 'a'))
+  }
 }
 
 // Converts a moment() date to the UNIX timestamp
