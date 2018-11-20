@@ -16,7 +16,7 @@ class Entry {
   // when comparing two dates.
   // dateString can be anything that moment() understands, but can also be one
   // of some special strings, like 'sunday' or 'yesterday'.
-  set date (dateString = moment().format('YYYY-MM-DD')) {
+  set date (dateString = moment().format('YYYY-MM-DD HH:mm:ss')) {
     const pattern = /(yesterday|today|sunday|monday|tuesday|wednesday|thursday|friday|saturday)/g
     const matchedWord = dateString.match(pattern)
 
