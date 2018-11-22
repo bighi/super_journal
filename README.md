@@ -63,7 +63,84 @@ env variable) to edit an entry in your default journal, that will be dated with
 the current date and time. But you can pass it many arguments to customize the
 behavior.
 
+These are all the arguments you can use with the `jnl write` command, and you
+can mix and match them:
 
+### Write to a specific journal
+
+`jnl write -j [journal]`
+
+`jnl write --journal [journal]`
+
+If you have multiple journals, the app will write, by default, to the first
+journal defined in your config. If you want to write to a different one, you
+have to use the --journal argument, with the filename of the journal you want.
+
+You can only use journals that were defined in your config file. This is to
+prevent a typo from creating a new journal file. For example, if you have a
+*work* journal and you write `-j wrok`, Super Journal will refuse to obey, to
+avoid creating a wrok.md file with a single entry.
+
+Example:
+
+`jnl write -j work`
+
+### Use a different date or time
+
+`jnl write -d [datetime]`
+
+`jnl write --date [datetime]`
+
+By default, Super Journal will use the current date and time to write an entry.
+You can change that by using the `--date` argument.
+
+It expects a string in the format `YYYY-MM-DD hh:mm:ss` or `YYYY-MM-DD`. If you
+don't pass the time, it will be saved as `00:00:00`.
+
+**But there is a secret for the date!** Instead of writing the entire year,
+month and day, you can *use a special string*. You can say `today`,
+`yesterday`, or the name of a day of the week like `monday` or `saturday`.
+
+If you're using the date AND time, you have to put inside quotes (because
+terminals doesn't accept spaces in arguments).
+
+Examples:
+
+`jnl write -d 2018-09-10`
+
+The entry will be dated as September 10th, 2018.
+
+`jnl write -d "2018-02-05 13:40:00"`
+
+The entry will be dated February 5th, 2018, with the time of `13:40:00`.
+
+`jnl write -d "yesterday 22:30"`
+
+An entry dated yesterday at 22:30.
+
+`jnl write -d sunday`
+
+An entry dated as of last sunday at `00:00`.
+
+### Write the content directly in the command line
+
+`jnl write -c [content]`
+
+`jnl write --content [content]`
+
+When you just want to write something quickly, you can use the `--content`
+parameter to not even open the editor. Just remember to put it inside quotes.
+
+If you can even pair it with the `--date` parameter to quickly archive
+something that happened in the past. Very useful with shell scripts.
+
+Examples:
+
+`jnl write --content "This entry will be saved without opening the editor"`
+
+`jnl write -d yesterday -c "This will to, and will be dated as of yesterday"`
+
+---
 
 ## Reading your journals
 
@@ -164,3 +241,24 @@ Will only show entries between September 10th and September 13th of the year
 If you combine it with something like `-j all` to read from all journals, that
 becomes a very useful tool to remember a slice of your life in all the contexts
 you write about.
+
+---
+
+## Edit an entire journal in a text editor
+
+`jnl edit`
+
+This command opens your entire journal in your default text editor (defined by
+the $EDITOR environment variable). You can then edit whatever you want and save
+it.
+
+By default it will open the first journal defined in your config file.
+
+### Edit a specific journal
+
+`jnl edit --journal [journal]`
+
+`jnl edit -j [journal]`
+
+You can also pass it the `--journal` parameter to decide which journal you want
+to edit.
