@@ -38,9 +38,9 @@ Super Journal is customized by placing a `config.json` file inside `~/.config/su
 
 Super Journal installs the `jnl` command in your computer. There are **three** basic commands to jnl, each one with many arguments you can pass.
 
-1) Write to a journal --> Write a new entry to one of your journals.
-2) Read a journal --> It prints journal content in your terminal.
-3) Edit a journal --> It opens the entire journal in your text editor.
+1) `jnl write` --> Write a new entry to one of your journals.
+2) `jnl read` --> It prints journal content in your terminal.
+3) `jnl edit` --> It opens the entire journal in your text editor.
 
 ## Writing your journals
 
