@@ -262,3 +262,11 @@ By default it will open the first journal defined in your config file.
 
 You can also pass it the `--journal` parameter to decide which journal you want
 to edit.
+
+---
+
+# Author
+
+This was created by Leonardo Bighi.
+
+You can find me on [twitter](https://www.twitter.com/bighi).
